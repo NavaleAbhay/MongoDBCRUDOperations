@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "63aaba6102701a1debbc1497"
+  },
+  "Name": "IT",
+  "Location": "Mumbai"
+},{
+  "_id": {
+    "$oid": "63aabb0e02701a1debbc1498"
+  },
+  "Name": "Analytics",
+  "Location": "Nagpur"
+},{
+  "_id": {
+    "$oid": "63aabbe3ac2786fb78d9d59b"
+  },
+  "Name": "Testing",
+  "Location": "Pune"
+},{
+  "_id": {
+    "$oid": "63aad89f6a3e4d385732c29f"
+  },
+  "Name": "Mech",
+  "Location": "Delhi"
+}]

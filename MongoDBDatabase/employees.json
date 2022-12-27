@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "63a5dd43a9ca4699ae5a4aa3"
+  },
+  "Address": "Bhavadi",
+  "Email": "shubham12@gmail.com",
+  "FirstName": "Shubham",
+  "LastName": "teli",
+  "Password": "shubham456"
+},{
+  "_id": {
+    "$oid": "63a5ddc1a9ca4699ae5a4aa4"
+  },
+  "Address": "Bhavadi",
+  "Email": "abhay12@gmail.com",
+  "FirstName": "Abhay",
+  "LastName": "Navale",
+  "Password": "abhay789"
+},{
+  "_id": {
+    "$oid": "63a6c777f06a88e7856980e0"
+  },
+  "FirstName": "Rohan",
+  "LastName": "Gavde",
+  "Email": "rihan@gmail.com",
+  "Address": "Chas",
+  "Password": "ro123"
+},{
+  "_id": {
+    "$oid": "63a6c867f06a88e7856980e1"
+  },
+  "FirstName": "Sahil",
+  "LastName": "Mankar",
+  "Email": "sahilmankar@gmail.com",
+  "Address": "Pargaon",
+  "Password": "123"
+},{
+  "_id": {
+    "$oid": "63a6c867f06a88e7856980e2"
+  },
+  "FirstName": "Jayesh",
+  "LastName": "Erende",
+  "Email": "jayesherande@gmail.com",
+  "Address": "Thugaon",
+  "Password": "Erande123"
+},{
+  "_id": {
+    "$oid": "63a6c867f06a88e7856980e3"
+  },
+  "FirstName": "prakash",
+  "LastName": "Totre",
+  "Email": "prakashtotre@gmail.com",
+  "Address": "Kurwandi",
+  "Password": "Totre123"
+}]

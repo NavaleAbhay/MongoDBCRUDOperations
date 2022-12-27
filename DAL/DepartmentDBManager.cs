@@ -1,18 +1,25 @@
-using System;
+
 using MongoDB.Bson;
 using MongoDB.Driver;
 namespace HR;
 
-public class DepartmentMongodbCRUDTest
+public class DepartmentDBManager
 {
-    protected static IMongoClient client;
-    protected static IMongoDatabase database;
+    private static IMongoClient client;
+    private static IMongoDatabase database;
+    private static IMongoCollection<Department> collection;
+    static DepartmentDBManager()
+    {
+        client = new MongoClient("mongodb://localhost:27017");
+        database = client.GetDatabase("Transflower");
+        collection = database.GetCollection<Department>("departments");
+    }
     public static Department GetDepartment()
     {
         Console.WriteLine("Enter name of department:");
-        string name = Console.ReadLine();
+        string? name = Console.ReadLine();
         Console.WriteLine("Enter location of department:");
-        string location = Console.ReadLine();
+        string? location = Console.ReadLine();
 
         Department department = new Department()
         {
@@ -21,54 +28,61 @@ public class DepartmentMongodbCRUDTest
         };
         return department;
     }
-
-
-
-    public static void CRUDwithMongoDb()
+     public static void ShowAllDepartments()
     {
-        string userSelection;
-        do
+        var all = collection.Find(new BsonDocument());
+        Console.WriteLine();
+
+        foreach (var i in all.ToEnumerable())
         {
-            client = new MongoClient();
-            database = client.GetDatabase("Transflower");
-            var collection = database.GetCollection<Department>("departments");
-            Console.WriteLine("\nPress select your option from the following\n1 - Insert\n2 - UpdateOne Document\n3 - Delete\n4 - Read All\n");
-            userSelection = Console.ReadLine();
-            switch (userSelection)
-            {
-                case "1":
-                    collection.InsertOne(GetDepartment());
-                    break;
+            Console.WriteLine(i._id + "\t" + i.Name + "\t" + i.Location);
+        }
+    }
 
-                case "2":
-                    var obj1 = GetDepartment();
-                    collection.FindOneAndUpdate<Department>
-                    (Builders<Department>.Filter.Eq("Name", obj1.Name),
-                            Builders<Department>.Update.Set("Location", obj1.Location));
-                    break;
-                case "3":
-                    //Find and Delete  
-                    Console.WriteLine("Please Enter the name to delete the record(so called document) : ");
-                    var deleteName = Console.ReadLine();
-                    collection.DeleteOne(s => s.Name == deleteName);
-                    break;
+    public static void ShowDepartmentByName()
+    {
+        Console.WriteLine("Enter Department Name whose Details to be shown");
+        string? name = Console.ReadLine();
+        var dept = collection.Find(Builders<Department>.Filter.Eq("Name", name));
+        Console.WriteLine();
 
-                case "4":
-                    //Read all existing document  
-                    var all = collection.Find(new BsonDocument());
-                    Console.WriteLine();
+        foreach (var i in dept.ToEnumerable())
+        {
+            Console.WriteLine(i._id + "\t" + i.Name + "\t" + i.Location);
+        }
+    }
+   
+    public static void InsertDepartment()
+    {
+        collection.InsertOne(GetDepartment());
+    }
 
-                    foreach (var i in all.ToEnumerable())
-                    {
-                        Console.WriteLine(i._id + "\t" + i.Name + "\t" + i.Location);
-                    }
-                    break;
+    public static void UpdateDepartment()
+    {
+        Console.WriteLine("Enter Existing Department Information to Update");
+        Department obj1 = GetDepartment();
+        var filter = Builders<Department>.Filter.Eq("Name", obj1.Name) &
+                    Builders<Department>.Filter.Eq("Location", obj1.Location);
 
-                default:
-                    Console.WriteLine("Please choose a correct option");
-                    break;
-            }
-        }while(userSelection!="0");
-}
+        Console.WriteLine("Enter new Department Information");
+        Department obj2 = GetDepartment();
+
+        //UpdateDefinition<Department>?
+        var update = Builders<Department>.Update.Set("Name", obj2.Name)
+                    .Set("Location", obj2.Location);
+
+        var result = collection.UpdateMany(filter, update);
+
+    }
+
+    public static void DeleteDepartment()
+    {
+        Console.WriteLine("Please Enter Details of Department to Delete : ");
+        var obj1 = GetDepartment();
+        var deletefilter = Builders<Department>.Filter.Eq("Name", obj1.Name) &
+                    Builders<Department>.Filter.Eq("Location", obj1.Location);
+        
+        var result=collection.DeleteMany(deletefilter);
+    }
 }
 
