@@ -80,8 +80,8 @@ public class DepartmentDBManager
         Console.WriteLine("Please Enter Details of Department to Delete : ");
         var obj1 = GetDepartment();
         var deletefilter = Builders<Department>.Filter.Eq("Name", obj1.Name) &
-                    Builders<Department>.Filter.Eq("Location", obj1.Location);
-        
+                           Builders<Department>.Filter.Eq("Location", obj1.Location);
+
         var result=collection.DeleteMany(deletefilter);
     }
 }

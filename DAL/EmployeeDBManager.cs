@@ -34,7 +34,7 @@ public class EmployeeDBManager
             LastName = lastName,
             Email = email,
             Address = address,
-            Password = password
+            Password = password 
         };
         return employee;
     }
@@ -109,7 +109,7 @@ public class EmployeeDBManager
         Employee employee = ValidateEmployee();
 
         var filter = Builders<Employee>.Filter.Eq("FirstName", employee.FirstName) &
-                    Builders<Employee>.Filter.Eq("LastName", employee.LastName);
+                     Builders<Employee>.Filter.Eq("LastName", employee.LastName);
 
         var result = collection.DeleteMany(filter);
 
