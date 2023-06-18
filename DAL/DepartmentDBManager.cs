@@ -28,7 +28,7 @@ public class DepartmentDBManager
         };
         return department;
     }
-     public static void ShowAllDepartments()
+    public static void ShowAllDepartments()
     {
         var all = collection.Find(new BsonDocument());
         Console.WriteLine();
@@ -51,7 +51,7 @@ public class DepartmentDBManager
             Console.WriteLine(i._id + "\t" + i.Name + "\t" + i.Location);
         }
     }
-   
+
     public static void InsertDepartment()
     {
         collection.InsertOne(GetDepartment());
@@ -81,8 +81,8 @@ public class DepartmentDBManager
         var obj1 = GetDepartment();
         var deletefilter = Builders<Department>.Filter.Eq("Name", obj1.Name) &
                     Builders<Department>.Filter.Eq("Location", obj1.Location);
-        
-        var result=collection.DeleteMany(deletefilter);
+
+        var result = collection.DeleteMany(deletefilter);
     }
 }
 

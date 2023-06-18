@@ -55,28 +55,28 @@ public class EmployeeDBManager
 
     public static void ShowAllEmployyes()
     {
-         var all = collection.Find(new BsonDocument());
+        var all = collection.Find(new BsonDocument());
         Console.WriteLine();
 
         foreach (var employee in all.ToEnumerable())
         {
-            Console.WriteLine(employee._id + "\t" + employee.FirstName + "\t" 
-                             + employee.LastName + "\t" + employee.Email + "\t" 
-                             + employee.Password + "\t" + employee.Address );
+            Console.WriteLine(employee._id + "\t" + employee.FirstName + "\t"
+                             + employee.LastName + "\t" + employee.Email + "\t"
+                             + employee.Password + "\t" + employee.Address);
         }
     }
 
-     public static void ShowEmployeeByFirstName()
+    public static void ShowEmployeeByFirstName()
     {
         Console.WriteLine("Enter Employee FirstName whose Details to be shown");
         string? name = Console.ReadLine();
         var all = collection.Find(Builders<Employee>.Filter.Eq("FirstName", name));
         Console.WriteLine();
-         foreach (var employee in all.ToEnumerable())
+        foreach (var employee in all.ToEnumerable())
         {
-            Console.WriteLine(employee._id + "\t" + employee.FirstName + "\t" 
-                             + employee.LastName + "\t" + employee.Email + "\t" 
-                             + employee.Password + "\t" + employee.Address );
+            Console.WriteLine(employee._id + "\t" + employee.FirstName + "\t"
+                             + employee.LastName + "\t" + employee.Email + "\t"
+                             + employee.Password + "\t" + employee.Address);
         }
     }
 
